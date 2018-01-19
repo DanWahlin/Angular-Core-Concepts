@@ -1,0 +1,33 @@
+<h1>{{ title }}</h1>
+<br />
+<filter-textbox (changed)="filter($event)"></filter-textbox>
+<br />
+<br />
+<table class="table table-striped">
+    <tr>
+        <th (click)="sort('name')">Name</th>
+        <th (click)="sort('city')">City</th>
+        <th (click)="sort('orderTotal')">Order Total</th>
+    </tr>
+    <tr *ngFor="let cust of filteredCustomers;trackBy:customerTrackBy;">
+        <td>
+            <a [routerLink]="['/orders', cust.id]">
+                {{ cust.name | capitalize }}
+            </a>
+        </td>
+        <td>{{ cust.city }}</td>
+        <td>{{ cust.orderTotal | currency:currencyCode:'symbol' }}
+    </tr>
+    <tr *ngIf="filteredCustomers && filteredCustomers.length">
+        <td colspan="2">&nbsp;</td>
+        <td>
+            {{ customersOrderTotal | currency:currencyCode:'symbol' }}
+        </td>
+    </tr>
+    <tr *ngIf="!filteredCustomers || !filteredCustomers.length">
+        <td colspan="4">No customers found</td>
+    </tr>
+</table>
+<br />
+Number of Customers: {{ filteredCustomers.length }}
+<br />
