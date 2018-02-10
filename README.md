@@ -8,7 +8,9 @@ This project shows several core features of Angular including:
 * Services
 * Routing
 
-## Running the Project
+Run the live demo at: https://stackblitz.com/github/DanWahlin/Angular-Core-Concepts
+
+## Running the Project Locally
 
 1. Install the Angular CLI
 
