@@ -8,7 +8,7 @@ This project shows several core features of Angular including:
 * Services
 * Routing
 
-Run the live demo at: https://stackblitz.com/github/DanWahlin/Angular-Core-Concepts
+<a href="https://stackblitz.com/github/DanWahlin/Angular-Core-Concepts" target="_blank">Run and edit the app on Stackblitz</a>
 
 ## Running the Project Locally
 
