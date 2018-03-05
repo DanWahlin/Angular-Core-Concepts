@@ -8,9 +8,9 @@ import { SorterService } from '../../core/sorter.service';
     templateUrl: './customers-list.component.html'
 })
 export class CustomersListComponent implements OnInit {
-    private _customers: ICustomer[] = [];
-
     title: string;
+
+    private _customers: ICustomer[] = [];
     @Input() get customers(): ICustomer[] { 
         return this._customers; 
     };
@@ -40,7 +40,9 @@ export class CustomersListComponent implements OnInit {
     filter(data: string) {
         if (data) {
             this.filteredCustomers = this.customers.filter((cust: ICustomer) => {
-                return cust.name.toLowerCase().indexOf(data.toLowerCase()) > -1;
+                return cust.name.toLowerCase().indexOf(data.toLowerCase()) > -1 ||
+                       cust.city.toLowerCase().indexOf(data.toLowerCase()) > -1 ||
+                       cust.orderTotal.toString().indexOf(data) > -1;
             });
             this.calculateOrders();
         } else {
