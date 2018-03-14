@@ -8,12 +8,13 @@ import { DataService } from '../core/data.service';
     templateUrl: './customers.component.html'
 })
 export class CustomersComponent implements OnInit {
-
+    title: string;
     people: ICustomer[];
 
     constructor(private dataservice: DataService) { }
 
     ngOnInit() { 
+      this.title = 'Customers';
       this.dataservice.getCustomers()
           .subscribe((customers: ICustomer[]) => this.people = customers);
       

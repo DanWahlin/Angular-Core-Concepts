@@ -8,8 +8,6 @@ import { SorterService } from '../../core/sorter.service';
     templateUrl: './customers-list.component.html'
 })
 export class CustomersListComponent implements OnInit {
-    title: string;
-
     private _customers: ICustomer[] = [];
     @Input() get customers(): ICustomer[] { 
         return this._customers; 
@@ -27,7 +25,7 @@ export class CustomersListComponent implements OnInit {
     constructor(private sorterService: SorterService) { }
 
     ngOnInit() { 
-        this.title = 'Customers';
+        
     }
 
     calculateOrders() {
