@@ -38,7 +38,7 @@ export class DataService {
           map(orders => {
             let custOrders = orders.filter((order: IOrder) => order.customerId === id);
             return custOrders;
-          }),
+          }), 
           catchError(this.handleError)
         );
     }
@@ -48,10 +48,8 @@ export class DataService {
       if (error.error instanceof Error) {
           const errMessage = error.error.message;
           return Observable.throw(errMessage);
-          // Use the following instead if using lite-server
-          // return Observable.throw(err.text() || 'backend server error');
       }
-      return Observable.throw(error || 'Node.js server error');
+      return Observable.throw(error || 'Server error');
     }
 
 }
