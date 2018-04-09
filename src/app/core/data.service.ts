@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/operator/map'; 
-import 'rxjs/add/operator/catch';
+import { map, catchError } from 'rxjs/operators';
 
 import { ICustomer, IOrder } from '../../app/shared/interfaces';
 
@@ -13,44 +11,47 @@ export class DataService {
 
     baseUrl: string = 'assets/';
     
-    constructor(private http: Http) { }
+    constructor(private http: HttpClient) { }
 
     getCustomers() : Observable<ICustomer[]> {
-      return this.http.get(this.baseUrl + 'customers.json')
-                  .map((res: Response) => res.json())
-                  .catch(this.handleError);
+      return this.http.get<ICustomer[]>(this.baseUrl + 'customers.json')
+        .pipe(
+          catchError(this.handleError)
+        );
+
     }
 
     getCustomer(id: number) : Observable<ICustomer> {
-      return this.http.get(this.baseUrl + 'customers.json')
-            .map((res: Response) => {
-              let customer = res.json().filter((cust: ICustomer) => cust.id === id);
-              return (customer && customer.length) ? customer[0] : null;
-            })
-            .catch(this.handleError);
+      return this.http.get<ICustomer[]>(this.baseUrl + 'customers.json')
+        .pipe(
+          map(customers => {
+            let customer = customers.filter((cust: ICustomer) => cust.id === id);
+            return (customer && customer.length) ? customer[0] : null;
+          }),
+          catchError(this.handleError)
+        )
     }
 
     getOrders(id: number) : Observable<IOrder[]> {
-      return this.http.get(this.baseUrl + 'orders.json')
-                  .map((res: Response) => {
-                    let orders = res.json().filter((order: IOrder) => order.customerId === id);
-                    return orders;
-                  })
-                  .catch(this.handleError);
+      return this.http.get<IOrder[]>(this.baseUrl + 'orders.json')
+        .pipe(
+          map(orders => {
+            let custOrders = orders.filter((order: IOrder) => order.customerId === id);
+            return custOrders;
+          }),
+          catchError(this.handleError)
+        );
     }
 
     private handleError(error: any) {
-        console.error('server error:', error); 
-        if (error instanceof Response) {
-          let errMessage = '';
-          try {
-            errMessage = error.json().error;
-          } catch(err) {
-            errMessage = error.statusText;
-          }
+      console.error('server error:', error);
+      if (error.error instanceof Error) {
+          const errMessage = error.error.message;
           return Observable.throw(errMessage);
-        }
-        return Observable.throw(error || 'Node.js server error');
+          // Use the following instead if using lite-server
+          // return Observable.throw(err.text() || 'backend server error');
+      }
+      return Observable.throw(error || 'Node.js server error');
     }
 
 }
