@@ -2,10 +2,10 @@
 FROM node:latest as node
 LABEL author="Dan Wahlin"
 WORKDIR /app
-COPY . .
+COPY package.json package.json
 RUN npm install
-ARG env=prod
-RUN npm run build -- --prod --environment $env
+COPY . .
+RUN npm run build -- --prod
 
 ##### Stage 2
 FROM nginx:alpine
