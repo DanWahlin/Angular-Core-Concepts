@@ -21,7 +21,7 @@ app.get('/api/customers', (req, res) => {
 });
 
 app.get('/api/orders', (req, res) => {
-    res.json(customers);
+    res.json(orders);
 });
 
 app.listen(3000);

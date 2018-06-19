@@ -8,13 +8,17 @@ import { ICustomer, IOrder } from '../../app/shared/interfaces';
 
 @Injectable()
 export class DataService {
+    // Use the following properties if running the Docker containers (comment out the ones that follow)
+    // customersUrl = 'http://localhost:3000/api/customers';
+    // ordersUrl = 'http://localhost:3000/api/orders';
 
-    baseUrl: string = 'assets/';
+    customersUrl = 'assets/customers.json';
+    ordersUrl = 'assets/orders.json';
     
     constructor(private http: HttpClient) { }
 
     getCustomers() : Observable<ICustomer[]> {
-      return this.http.get<ICustomer[]>(this.baseUrl + 'customers.json')
+      return this.http.get<ICustomer[]>(this.customersUrl)
         .pipe(
           catchError(this.handleError)
         );
@@ -22,7 +26,7 @@ export class DataService {
     }
 
     getCustomer(id: number) : Observable<ICustomer> {
-      return this.http.get<ICustomer[]>(this.baseUrl + 'customers.json')
+      return this.http.get<ICustomer[]>(this.customersUrl)
         .pipe(
           map(customers => {
             let customer = customers.filter((cust: ICustomer) => cust.id === id);
@@ -33,7 +37,7 @@ export class DataService {
     }
 
     getOrders(id: number) : Observable<IOrder[]> {
-      return this.http.get<IOrder[]>(this.baseUrl + 'orders.json')
+      return this.http.get<IOrder[]>(this.ordersUrl)
         .pipe(
           map(orders => {
             let custOrders = orders.filter((order: IOrder) => order.customerId === id);
