@@ -9,23 +9,23 @@ import { SorterService } from '../../core/sorter.service';
 })
 export class CustomersListComponent implements OnInit {
     private _customers: ICustomer[] = [];
-    @Input() get customers(): ICustomer[] { 
-        return this._customers; 
-    };
-    set customers(value: ICustomer[]) { 
+    @Input() get customers(): ICustomer[] {
+        return this._customers;
+    }
+    set customers(value: ICustomer[]) {
         if (value) {
-            this.filteredCustomers = this._customers = value; 
+            this.filteredCustomers = this._customers = value;
             this.calculateOrders();
         }
     }
     filteredCustomers: ICustomer[] = [];
     customersOrderTotal: number;
-    currencyCode: string = 'USD';
+    currencyCode = 'USD';
 
     constructor(private sorterService: SorterService) { }
 
-    ngOnInit() { 
-        
+    ngOnInit() {
+
     }
 
     calculateOrders() {

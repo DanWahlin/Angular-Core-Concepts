@@ -8,16 +8,17 @@ import { ICustomer, IOrder } from '../../app/shared/interfaces';
 
 @Injectable()
 export class DataService {
-    // Use the following properties if running the Docker containers (comment out the ones that follow)
+    // Use the following properties if running the Docker containers via Docker Compose
     // customersUrl = 'http://localhost:3000/api/customers';
     // ordersUrl = 'http://localhost:3000/api/orders';
 
+    // Use the following properties if running the app stand-alone with no external dependencies
     customersUrl = 'assets/customers.json';
     ordersUrl = 'assets/orders.json';
-    
+
     constructor(private http: HttpClient) { }
 
-    getCustomers() : Observable<ICustomer[]> {
+    getCustomers(): Observable<ICustomer[]> {
       return this.http.get<ICustomer[]>(this.customersUrl)
         .pipe(
           catchError(this.handleError)
@@ -25,24 +26,24 @@ export class DataService {
 
     }
 
-    getCustomer(id: number) : Observable<ICustomer> {
+    getCustomer(id: number): Observable<ICustomer> {
       return this.http.get<ICustomer[]>(this.customersUrl)
         .pipe(
           map(customers => {
-            let customer = customers.filter((cust: ICustomer) => cust.id === id);
+            const customer = customers.filter((cust: ICustomer) => cust.id === id);
             return (customer && customer.length) ? customer[0] : null;
           }),
           catchError(this.handleError)
-        )
+        );
     }
 
-    getOrders(id: number) : Observable<IOrder[]> {
+    getOrders(id: number): Observable<IOrder[]> {
       return this.http.get<IOrder[]>(this.ordersUrl)
         .pipe(
           map(orders => {
-            let custOrders = orders.filter((order: IOrder) => order.customerId === id);
+            const custOrders = orders.filter((order: IOrder) => order.customerId === id);
             return custOrders;
-          }), 
+          }),
           catchError(this.handleError)
         );
     }

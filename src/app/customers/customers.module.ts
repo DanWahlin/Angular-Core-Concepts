@@ -11,7 +11,7 @@ import { CustomersRoutingModule } from './customers-routing.module';
 
 @NgModule({
     imports: [ CommonModule, FormsModule, SharedModule, CustomersRoutingModule ],
-    declarations: [ CustomersListComponent, FilterTextboxComponent, 
+    declarations: [ CustomersListComponent, FilterTextboxComponent,
                     CustomersComponent]
 })
 export class CustomersModule { }

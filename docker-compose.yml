@@ -14,7 +14,7 @@ services:
     image: nginx-angular
     build:
       context: .
-      dockerfile: .docker/nginx.dockerfile
+      dockerfile: nginx.dockerfile
     volumes:
       - ./dist:/usr/share/nginx/html
     ports:
@@ -30,7 +30,7 @@ services:
     image: angular-node-service
     build:
       context: ./server
-      dockerfile: .docker/node.dockerfile
+      dockerfile: node.dockerfile
     environment:
       - NODE_ENV=development
     ports:
