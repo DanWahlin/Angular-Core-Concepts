@@ -15,7 +15,7 @@ services:
     image: nginx-angular
     build:
       context: .
-      dockerfile: .docker/nginx.prod.dockerfile
+      dockerfile: nginx.prod.dockerfile
     ports:
       - "80:80"
       - "443:443"
@@ -29,7 +29,7 @@ services:
     image: angular-node-service
     build:
       context: ./server
-      dockerfile: .docker/node.dockerfile
+      dockerfile: node.dockerfile
     environment:
       - NODE_ENV=production
     ports:
