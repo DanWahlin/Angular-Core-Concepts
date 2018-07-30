@@ -1,5 +1,5 @@
 
-# This can be used to run a development version of the Angular and Node containers
+# This can be used to run a production version of the Angular and Node containers
 # See the readme.md for details on changes that are required in the Angular service
 
 # Run docker-compose -f docker-compose.prod.yml build
