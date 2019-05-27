@@ -2,6 +2,10 @@ FROM nginx:alpine
 LABEL author="Dan Wahlin"
 COPY ./config/nginx.conf /etc/nginx/conf.d/default.conf
 
+
+
+
+
 # Use the following commands to build the image and run the container (run from the root folder)
 # 1. You'll first need to build the project using `ng build`
 

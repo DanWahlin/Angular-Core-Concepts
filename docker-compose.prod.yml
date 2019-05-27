@@ -3,10 +3,10 @@
 # See the readme.md for details on changes that are required in the Angular service
 
 # Run docker-compose -f docker-compose.prod.yml build
-# Run docker-compose up
+# Run docker-compose -f docker-compose.prod.yml up
 # Live long and prosper
 
-version: '3.1'
+version: '3.7'
 
 services:
 
