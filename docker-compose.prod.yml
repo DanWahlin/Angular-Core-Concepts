@@ -37,7 +37,7 @@ services:
     networks:
       - app-network
       
-  # Disabled in case someone is running this on Windows
+  # Disabled in case someone is running this on Windows (OK to uncomment if on Mac/Linux)
   # cadvisor:
   #   container_name: cadvisor
   #   image: google/cadvisor
