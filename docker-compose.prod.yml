@@ -37,18 +37,19 @@ services:
     networks:
       - app-network
       
-  cadvisor:
-    container_name: cadvisor
-    image: google/cadvisor
-    volumes:
-      - /:/rootfs:ro
-      - /var/run:/var/run:rw
-      - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker:ro
-    ports:
-      - "8080:8080"
-    networks:
-      - app-network
+  # Disabled in case someone is running this on Windows
+  # cadvisor:
+  #   container_name: cadvisor
+  #   image: google/cadvisor
+  #   volumes:
+  #     - /:/rootfs:ro
+  #     - /var/run:/var/run:rw
+  #     - /sys:/sys:ro
+  #     - /var/lib/docker/:/var/lib/docker:ro
+  #   ports:
+  #     - "8080:8080"
+  #   networks:
+  #     - app-network
 
 networks:
   app-network:
