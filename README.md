@@ -8,15 +8,13 @@ This project shows several core features of Angular including:
 * Services
 * Routing
 
-<a href="https://stackblitz.com/github/DanWahlin/Angular-Core-Concepts" target="_blank">Run and edit the app on Stackblitz</a>
-
 ## Running the Project Locally
 
 1. Install the Angular CLI
 
     `npm install -g @angular/cli`
 
-1. Run `npm install` 
+1. Run `npm install` at the root of this project
 
 1. Run `ng serve -o`
 
@@ -27,11 +25,26 @@ This project shows several core features of Angular including:
 
     `npm install -g @angular/cli`
 
-1. Run `npm install`
+1. Run `npm install` at the root of this project
 
 1. Build the project
 
     `ng build`
+
+1. Note that this build puts the build files directly in the `dist` folder. If your `angular.json` file in your own custom project puts them in a subfolder such as `dist/your-project-folder` then you'll need to update the `docker-compose.yml` file. In that case you'd change:
+
+    ```yaml
+    volumes:
+      - ./dist:/usr/share/nginx/html
+    ```
+
+    To:
+
+    ```yaml
+    volumes:
+      - ./dist/your-project-folder:/usr/share/nginx/html
+    ```
+
 
 1. Run `docker-compose build`
 
@@ -39,4 +52,18 @@ This project shows several core features of Angular including:
 
 1. Visit `http://localhost`
 
-If you'd like to run the `production` version run `docker-compose -f docker-compose.prod.yml [build | up]`. This uses a multi-stage Docker build process to create the nginx image for the Angular app.
+## Running the `Production` Version in Containers
+
+1. Run `docker-compose -f docker-compose.prod.yml [build | up]`. This uses a multi-stage Docker build process to create the nginx image for the Angular app.
+
+    **Note**: This project build puts the Angular build files directly in the `dist` folder. If your `angular.json` file in your own custom project puts them in a subfolder such as `dist/your-project-folder` then you'll need to update `nginx.prod.dockerfile` with the appropriate path. You'd need to update this instruction:
+
+    ```dockerfile
+    COPY --from=node /app/dist /usr/share/nginx/html
+    ```
+
+    To:
+
+    ```dockerfile
+    COPY --from=node /app/dist/your-project-folder /usr/share/nginx/html
+    ```
