@@ -31,6 +31,8 @@ This project shows several core features of Angular including:
 
     `ng build`
 
+1. Ensure that you have volumes (file sharing) enabled in the Docker Desktop settings.
+
 1. Note that this build puts the build files directly in the `dist` folder. If your `angular.json` file in your own custom project puts them in a subfolder such as `dist/your-project-folder` then you'll need to update the `docker-compose.yml` file. In that case you'd change:
 
     ```yaml
