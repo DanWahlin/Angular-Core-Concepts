@@ -5,7 +5,11 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
-RUN npm run build -- --prod
+# Angular 12+ does a production build by default
+RUN npm run build
+
+# Angular < 12 requires a flag for a prod build
+# RUN npm run build -- --prod
 
 ##### Stage 2
 FROM nginx:alpine
