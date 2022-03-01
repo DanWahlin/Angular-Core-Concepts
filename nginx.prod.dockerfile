@@ -1,5 +1,5 @@
 ##### Stage 1
-FROM node:latest as node
+FROM node:lts as node
 LABEL author="Dan Wahlin"
 WORKDIR /app
 COPY package.json package-lock.json ./
