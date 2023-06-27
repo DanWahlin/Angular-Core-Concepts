@@ -5,13 +5,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
-# Angular 12+ does a production build by default if you've enabled it using 
-# ng update @angular/cli --migrate-only production-by-default
-# https://github.com/angular/angular-cli/issues/21073#issuecomment-855960826
-# RUN npm run build
-
-# Prod build if production-by-default hasn't been enabled 
-RUN npm run build -- --prod
+RUN npm run build
 
 ##### Stage 2
 FROM nginx:alpine
