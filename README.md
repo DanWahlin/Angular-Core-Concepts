@@ -1,27 +1,71 @@
-# AngularCoreConcepts
+# Angular Core Concepts
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.1.
+This project shows several core features of Angular including:
 
-## Development server
+* Components
+* Data Binding
+* Communication between components
+* Services
+* Routing
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Running the Project Locally
 
-## Code scaffolding
+1. Install the Angular CLI
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+    `npm install -g @angular/cli`
 
-## Build
+1. Run `npm install` at the root of this project
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. Run `ng serve -o`
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Running the Project Using Docker Containers
 
-## Running end-to-end tests
+1. Install the Angular CLI
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+    `npm install -g @angular/cli`
 
-## Further help
+1. Run `npm install` at the root of this project
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+1. Build the project
+
+    `ng build`
+
+1. Ensure that you have volumes (file sharing) enabled in the Docker Desktop settings.
+
+1. Note that this build puts the build files directly in the `dist` folder. If your `angular.json` file in your own custom project puts them in a subfolder such as `dist/your-project-folder` then you'll need to update the `docker-compose.yml` file. In that case you'd change:
+
+    ```yaml
+    volumes:
+      - ./dist:/usr/share/nginx/html
+    ```
+
+    To:
+
+    ```yaml
+    volumes:
+      - ./dist/your-project-folder:/usr/share/nginx/html
+    ```
+
+
+1. Run `docker-compose build`
+
+1. Run `docker-compose up`
+
+1. Visit `http://localhost`
+
+## Running the `Production` Version in Containers
+
+1. Run `docker-compose -f docker-compose.prod.yml [build | up]`. This uses a multi-stage Docker build process to create the nginx image for the Angular app.
+
+    **Note**: This project build puts the Angular build files directly in the `dist` folder. If your `angular.json` file in your own custom project puts them in a subfolder such as `dist/your-project-folder` then you'll need to update `nginx.prod.dockerfile` with the appropriate path. You'd need to update this instruction:
+
+    ```dockerfile
+    COPY --from=node /app/dist /usr/share/nginx/html
+    ```
+
+    To:
+
+    ```dockerfile
+    COPY --from=node /app/dist/your-project-folder /usr/share/nginx/html
+    ```

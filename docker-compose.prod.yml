@@ -1,0 +1,56 @@
+
+# This can be used to run a production version of the Angular and Node containers
+# See the readme.md for details on changes that are required in the Angular service
+
+# Run docker-compose -f docker-compose.prod.yml build
+# Run docker-compose -f docker-compose.prod.yml up
+# Live long and prosper
+
+version: '3.7'
+
+services:
+
+  nginx:
+    container_name: nginx-angular
+    image: nginx-angular
+    build:
+      context: .
+      dockerfile: nginx.prod.dockerfile
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on: 
+      - node
+    networks:
+      - app-network
+
+  node:
+    container_name: angular-node-service
+    image: angular-node-service
+    build:
+      context: ./server
+      dockerfile: node.dockerfile
+    environment:
+      - NODE_ENV=production
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+      
+  # Disabled in case someone is running this on Windows (OK to uncomment if on Mac/Linux)
+  # cadvisor:
+  #   container_name: cadvisor
+  #   image: google/cadvisor
+  #   volumes:
+  #     - /:/rootfs:ro
+  #     - /var/run:/var/run:rw
+  #     - /sys:/sys:ro
+  #     - /var/lib/docker/:/var/lib/docker:ro
+  #   ports:
+  #     - "8080:8080"
+  #   networks:
+  #     - app-network
+
+networks:
+  app-network:
+    driver: bridge
