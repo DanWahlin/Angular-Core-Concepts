@@ -91,3 +91,10 @@ This project shows several core features of Angular including:
     ```dockerfile
     COPY --from=node /app/dist/your-project-folder /usr/share/nginx/html
     ```
+
+## Acknowledgement to the original author, and note ##
+This is a code review project. 
+Just another explorer learning and commenting in several places where I needed to research codes to understand them better, so I hope the comments may help someone along the way as well, if not just me !
+ ### Comment sources: ###
+- Angular Official Documentation
+- Google Bard
