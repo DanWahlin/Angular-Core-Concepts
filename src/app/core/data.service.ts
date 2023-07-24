@@ -9,12 +9,12 @@ import { ICustomer, IOrder } from '../../app/shared/interfaces';
 @Injectable()
 export class DataService {
   // Use the following properties if running the Docker containers via Docker Compose
-  // customersUrl = 'http://localhost:3000/api/customers';
-  // ordersUrl = 'http://localhost:3000/api/orders';
+  customersUrl = 'http://localhost:3000/api/customers';
+  ordersUrl = 'http://localhost:3000/api/orders';
 
   // Use the following properties if running the app stand-alone with no external dependencies
-  customersUrl = 'assets/customers.json';
-  ordersUrl = 'assets/orders.json';
+//   customersUrl = 'assets/customers.json';
+//   ordersUrl = 'assets/orders.json';
 
   constructor(private http: HttpClient) { }
 
