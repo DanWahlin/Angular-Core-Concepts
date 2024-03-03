@@ -16,7 +16,7 @@ services:
       context: .
       dockerfile: nginx.dockerfile
     volumes:
-      - ./dist:/usr/share/nginx/html
+      - ./dist/angular-core-concepts/browser:/usr/share/nginx/html
     ports:
       - "80:80"
       - "443:443"
