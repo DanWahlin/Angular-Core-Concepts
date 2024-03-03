@@ -27,17 +27,6 @@ This project shows several core features of Angular including:
 
 1. Run `npm install` at the root of this project
 
-1. The Angular project uses JSON files in the `assets` folder for the app data by default. If you'd like to use the data provided by the Node.js API, open `src/app/core/data.service.ts` and change the code to the following:
-
-    ```typescript
-    customersUrl = 'http://localhost:3000/api/customers';
-    ordersUrl = 'http://localhost:3000/api/orders';
-
-    // Use the following properties if running the app stand-alone with no external dependencies
-    // customersUrl = 'assets/customers.json';
-    // ordersUrl = 'assets/orders.json';
-    ```
-
 1. Build the project
 
     `ng build`
@@ -66,17 +55,6 @@ This project shows several core features of Angular including:
 1. Visit `http://localhost`
 
 ## Running the `Production` Version in Containers
-
-1. The Angular project uses JSON files in the `assets` folder for the app data by default. If you'd like to use the data provided by the Node.js API, open `src/app/core/data.service.ts` and change the code to the following:
-
-    ```typescript
-    customersUrl = 'http://localhost:3000/api/customers';
-    ordersUrl = 'http://localhost:3000/api/orders';
-
-    // Use the following properties if running the app stand-alone with no external dependencies
-    // customersUrl = 'assets/customers.json';
-    // ordersUrl = 'assets/orders.json';
-    ```
 
 1. Run `docker-compose -f docker-compose.prod.yml [build | up]`. This uses a multi-stage Docker build process to create the nginx image for the Angular app.
 

@@ -3,19 +3,44 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Angular-Core-Concepts": {
+    "angular-core-concepts": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:component": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:resolver": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist",
+            "outputPath": "dist/angular-core-concepts",
             "index": "src/index.html",
-            "main": "src/main.ts",
+            "browser": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -46,12 +71,9 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
@@ -60,10 +82,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Angular-Core-Concepts:build:production"
+              "buildTarget": "angular-core-concepts:build:production"
             },
             "development": {
-              "browserTarget": "Angular-Core-Concepts:build:development"
+              "buildTarget": "angular-core-concepts:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -71,7 +93,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Angular-Core-Concepts:build"
+            "buildTarget": "angular-core-concepts:build"
           }
         },
         "test": {

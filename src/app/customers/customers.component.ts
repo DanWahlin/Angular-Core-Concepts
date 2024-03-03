@@ -1,21 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 
-import { ICustomer } from '../shared/interfaces';
+import { Customer } from '../shared/interfaces';
 import { DataService } from '../core/data.service';
+import { CommonModule } from '@angular/common';
+import { Observable, of } from 'rxjs';
+import { CustomersListComponent } from './customers-list/customers-list.component';
 
 @Component({
     selector: 'app-customers',
+    standalone: true,
+    imports: [ CommonModule, CustomersListComponent ],
     templateUrl: './customers.component.html'
 })
 export class CustomersComponent implements OnInit {
     title = 'Customers';
-    people: ICustomer[] = [];
-
-    constructor(private dataService: DataService) { }
+    people$: Observable<Customer[]> = of([]);
+    dataService: DataService = inject(DataService);
 
     ngOnInit() {
-      this.dataService.getCustomers()
-          .subscribe((customers: ICustomer[]) => this.people = customers);
+      this.people$ = this.dataService.getCustomers();
 
       // this.people = [
       //     { id: 1, name: 'john Doe', city: 'Phoenix', orderTotal: 9.99, customerSince: new Date(2014, 7, 10) },

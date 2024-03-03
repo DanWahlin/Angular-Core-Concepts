@@ -1,31 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Component, Input, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Observable, of } from 'rxjs';
 
 import { DataService } from '../core/data.service';
-import { ICustomer, IOrder, IOrderItem } from '../shared/interfaces';
+import { Customer, Order } from '../shared/interfaces';
+import { CapitalizePipe } from '../shared/capitalize.pipe';
 
 @Component({
   selector: 'app-orders',
+  standalone: true,
+  imports: [ CommonModule, RouterLink, CapitalizePipe ],
   templateUrl: './orders.component.html',
   styleUrls: [ './orders.component.css' ]
 })
-export class OrdersComponent implements OnInit {
+export class OrdersComponent {
 
-  orders: IOrder[] = [];
-  customer: ICustomer | null = null;
+  orders$: Observable<Order[]> = of([]);
+  customer$: Observable<Customer> = of();
+  dataService: DataService = inject(DataService);
+  route: ActivatedRoute = inject(ActivatedRoute);
 
-  constructor(private dataService: DataService,
-              private route: ActivatedRoute) { }
-
-  ngOnInit() {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.dataService.getOrders(id).subscribe((orders: IOrder[]) => {
-      this.orders = orders;
-    });
-    this.dataService.getCustomer(id).subscribe((customer: ICustomer | null) => {
-      this.customer = customer;
-    });
+  // Get the customer ID from the route
+  @Input() set id(value: string) {
+    const idParam = +value;
+    this.orders$ = this.dataService.getOrders(idParam);
+    this.customer$ = this.dataService.getCustomer(idParam);
   }
-
 
 }

@@ -1,17 +1,17 @@
-export interface ICustomer {
+export interface Customer {
     id: number;
     name: string;
     city: string;
-    orderTotal: number;
+    orderTotal?: number;
     customerSince: any;
 }
 
-export interface IOrder {
+export interface Order {
     customerId: number;
-    orderItems: IOrderItem[];
+    orderItems: OrderItem[];
 }
 
-export interface IOrderItem {
+export interface OrderItem {
     id: number;
     productName: string;
     itemCost: number;
