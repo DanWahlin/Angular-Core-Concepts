@@ -21,6 +21,11 @@
             <td>{{ cust.orderTotal | currency:currencyCode:'symbol' }}
         </tr>
     }
+    @empty {
+        <tr> 
+            <td colspan="3">There are no orders.</td>
+        </tr>
+    }
 
     @if (this.filteredCustomers && this.filteredCustomers.length) {
         <tr>
