@@ -27,7 +27,7 @@
         </tr>
     }
 
-    @if (this.filteredCustomers && this.filteredCustomers.length) {
+    @if (this.filteredCustomers?.length) {
         <tr>
             <td colspan="2">&nbsp;</td>
             <td>
@@ -37,7 +37,7 @@
     }  
     @else {
         <tr>
-            <td colspan="4">No customers found</td>
+            <td colspan="3">No customers found</td>
         </tr>
     }
 
