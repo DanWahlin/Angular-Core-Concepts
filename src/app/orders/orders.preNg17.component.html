@@ -1,0 +1,19 @@
+<div *ngIf="(customer$ | async) as customer; else elseBlock">
+    <h1>Orders for {{ customer.name | capitalize  }}</h1>
+
+    <table class="table table-hover orders-table">
+        <!-- Technically we can put outer *ngFor on the table -->
+        <ng-container *ngFor="let order of orders$ | async">
+            <tr *ngFor="let orderItem of order.orderItems; let isOdd=odd" 
+                [class.odd]="isOdd">
+                <td>{{ orderItem.productName }}</td>
+                <td>{{ orderItem.itemCost | currency:'USD':'symbol' }}</td>    
+            </tr>
+        </ng-container>
+    </table>
+</div>
+<ng-template #elseBlock>
+   No customer found
+</ng-template>  
+<br />
+<a routerLink="/customers">View All Customers</a>

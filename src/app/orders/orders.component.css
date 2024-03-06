@@ -1,3 +1,7 @@
 .orders-table {
     margin-top: 20px;
 }
+
+.odd {
+    background-color: #efefef;
+}

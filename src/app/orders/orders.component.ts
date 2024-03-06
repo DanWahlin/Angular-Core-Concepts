@@ -21,7 +21,7 @@ export class OrdersComponent {
   dataService: DataService = inject(DataService);
   route: ActivatedRoute = inject(ActivatedRoute);
 
-  // Get the customer ID from the route
+  // Get the customer ID from the route - see `provideRouter(routes, withComponentInputBinding())` in app.config.ts
   @Input() set id(value: string) {
     const idParam = +value;
     this.orders$ = this.dataService.getOrders(idParam);
