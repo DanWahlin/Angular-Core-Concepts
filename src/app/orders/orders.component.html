@@ -3,7 +3,7 @@
         <h1>Orders for {{ customer.name | capitalize }}</h1>
 
         <table class="table table-hover orders-table">
-            @for ((order of orders$ | async); track order.customerId) {
+            @for (order of orders$ | async; track order.customerId) {
                 @for (orderItem of order.orderItems; track orderItem.id; let isOdd=$odd) {
                     <tr [class.odd]="isOdd">
                         <td>{{ orderItem.productName }}</td>
@@ -19,6 +19,18 @@
         No customer found
     </div>  
 }
+
+@switch ((this.customer$ | async)?.city) {
+    @case ('New York') {
+        New York
+    }
+    @default {
+        <div>
+            No customer found
+        </div>  
+    }
+}
+
 
 <br />
 <a routerLink="/customers">View All Customers</a>
