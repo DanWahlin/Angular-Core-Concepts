@@ -22,15 +22,12 @@
 
 @switch ((this.customer$ | async)?.city) {
     @case ('New York') {
-        New York
+        <!-- New York -->
     }
     @default {
-        <div>
-            No customer found
-        </div>  
+        <!-- Default -->
     }
 }
-
 
 <br />
 <a routerLink="/customers">View All Customers</a>
