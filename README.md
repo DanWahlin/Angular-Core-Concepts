@@ -41,16 +41,8 @@ This project shows several core features of Angular including:
 
 ## Running the `Production` Version in Containers
 
-1. Run `docker-compose -f docker-compose.prod.yml [build | up]`. This uses a multi-stage Docker build process to create the nginx image for the Angular app.
+1. Run `docker-compose -f docker-compose.prod.yml build`. This uses a multi-stage Docker build process to create the nginx image for the Angular app.
 
-    **Note**: This project build puts the Angular build files directly in the `dist` folder. If your `angular.json` file in your own custom project puts them in a subfolder such as `dist/your-project-folder` then you'll need to update `nginx.prod.dockerfile` with the appropriate path. You'd need to update this instruction:
+1. Run `docker-compose -f docker-compose.prod.yml up` and visit `http://localhost`.
 
-    ```dockerfile
-    COPY --from=node /app/dist /usr/share/nginx/html
-    ```
-
-    To:
-
-    ```dockerfile
-    COPY --from=node /app/dist/your-project-folder /usr/share/nginx/html
-    ```
+1. Run `docker-compose -f docker-compose.prod.yml down` once you're done.
